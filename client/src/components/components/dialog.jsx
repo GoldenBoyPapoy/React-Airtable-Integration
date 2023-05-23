@@ -9,6 +9,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const FormDialog = (props) => {
   const [open, setOpen] = React.useState(false);
+
+  const validate = () => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
   return (
     <div>
       <Dialog open={true} onClose={props.handleClose}>
@@ -25,6 +30,7 @@ const FormDialog = (props) => {
             type="email"
             fullWidth
             variant="standard"
+            autoComplete="off"
           />
         </DialogContent>
         <DialogActions>
