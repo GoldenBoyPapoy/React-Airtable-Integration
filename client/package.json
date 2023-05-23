@@ -5,13 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pavlo Seletskyi",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.18",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.2",
+    "alova": "^2.5.3",
     "autoprefixer": "^10.4.14",
     "headlessui": "^0.0.0",
     "heroicons": "^2.0.18",

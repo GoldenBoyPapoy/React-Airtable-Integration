@@ -1,4 +1,3 @@
-import { Fragment, useState } from "react";
 import { Popover } from "@headlessui/react";
 import { Link } from "react-router-dom";
 const Header = () => {

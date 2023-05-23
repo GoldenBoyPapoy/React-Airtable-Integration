@@ -5,22 +5,22 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Fragment } from "react";
-import Header from "./components/layouts/Header";
+import Header from "./components/layouts/Header1";
 import Footer from "./components/layouts/Footer";
 
-import Dashboard from "./components/pages/index";
-import About from "./components/pages/About.js";
-import Contact from "./components/pages/Contact";
+import Compare from "./components/pages/Compare";
+import AboutUS from "./components/pages/AboutUS";
+import FAQ from "./components/pages/FAQ";
 const App = () => {
   return (
     <Fragment>
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/" element={<Navigate to="/compare" />} />
+          <Route path="/compare" element={<Compare />} />
+          <Route path="/aboutUS" element={<AboutUS />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
         <Footer />
       </Router>
