@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import IconButton from "@mui/material/IconButton";
 
 const DirectionStack = ({ category, setCategory, setSource }) => {
   const [categories, setCategories] = useState([]);
+  const visibleCount = 6;
+  const totalCount = categories.length + 1;
+  const [current, setCurrent] = useState(1);
   const token =
     "patwxGIW1IEy4obje.4698f2fae36a50dd8b00fb6335086193541405e1bf506bd86f8875db903e045d";
-
+  const setCurrentPage = (page) => {
+    if (page >= 1 && page <= totalCount - visibleCount + 1) setCurrent(page);
+  };
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -30,33 +40,62 @@ const DirectionStack = ({ category, setCategory, setSource }) => {
   }, []);
 
   return (
-    <div>
-      <Stack direction="row" spacing={2}>
-        <Button
-          variant={category == -1 ? "contained" : "outlined"}
-          onClick={() => {
-            setCategory(-1);
-            setSource("");
-          }}
+    <Toolbar disableGutters>
+      <Box sx={{ flexGrow: 1, display: { xs: "flex" } }}>
+        <IconButton onClick={() => setCurrentPage(current - 1)}>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+      </Box>
+
+      <Box sx={{ flexGrow: 1, display: { xs: "flex" }, mr: 1 }}>
+        <Stack
+          sx={{ flexGrow: 1, display: { xs: "flex" }, mr: 1 }}
+          direction="row"
+          spacing={2}
         >
-          All Categories
-        </Button>
-        {categories.map((item, index) => {
-          return (
-            <Button
-              key={index}
-              variant={category == index ? "contained" : "outlined"}
-              onClick={() => {
-                setCategory(index);
-                setSource(`?filter_Category=${item.fields.Name}`);
-              }}
-            >
-              {item.fields.Name}
-            </Button>
-          );
-        })}
-      </Stack>
-    </div>
+          <Button
+            variant={category == -1 ? "contained" : "outlined"}
+            style={{ display: current == 1 ? "block" : "none" }}
+            onClick={() => {
+              setCategory(-1);
+              setSource("");
+            }}
+          >
+            All Categories
+          </Button>
+          {categories.map((item, index) => {
+            return (
+              <Button
+                key={index}
+                variant={category == index ? "contained" : "outlined"}
+                style={{
+                  display:
+                    index + 2 >= current &&
+                    index + 2 <= visibleCount + current - 1
+                      ? "block"
+                      : "none",
+                }}
+                onClick={() => {
+                  setCategory(index);
+                  setSource(`&filter_Category=${item.fields.Name}`);
+                }}
+              >
+                {item.fields.Name}
+              </Button>
+            );
+          })}
+        </Stack>
+      </Box>
+
+      <Box sx={{ flexGrow: 0 }}>
+        <IconButton
+          sx={{ flexGrow: 0 }}
+          onClick={() => setCurrentPage(current + 1)}
+        >
+          <KeyboardArrowRightIcon />
+        </IconButton>
+      </Box>
+    </Toolbar>
   );
 };
 

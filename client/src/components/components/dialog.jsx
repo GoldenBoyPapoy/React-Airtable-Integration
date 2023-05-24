@@ -6,13 +6,22 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import InputLabel from "@mui/material/InputLabel";
+import Input from "@mui/material/Input";
 
 const FormDialog = (props) => {
   const [open, setOpen] = React.useState(false);
-
+  const [email, setEmail] = React.useState("");
+  const [error, setError] = React.useState("");
   const validate = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
+    if (regex.test(email)) {
+      props.handleSave(email);
+    } else {
+      setError("Invalid Email Address");
+    }
   };
   return (
     <div>
@@ -23,19 +32,27 @@ const FormDialog = (props) => {
             Submit email to unlock short description.
           </DialogContentText>
           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email"
-            type="email"
-            fullWidth
+            error={error != "" ? true : false}
+            id="standard-info"
+            label={error}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             variant="standard"
-            autoComplete="off"
+            fullWidth
           />
+          {/* <FormControl fullWidth>
+            <InputLabel htmlFor="my-input">Email address</InputLabel>
+            <Input id="my-input" aria-describedby="my-helper-text"  />
+            <FormHelperText id="my-helper-text">
+              We'll never share your email.
+            </FormHelperText>
+          </FormControl> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose}>Cancel</Button>
-          <Button onClick={props.handleSave}>Submit</Button>
+          <Button variant="contained" onClick={validate}>
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

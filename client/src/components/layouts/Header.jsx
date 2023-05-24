@@ -1,52 +1,80 @@
-import { Popover } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+
 const Header = () => {
+  const [tab, setTab] = useState("compare");
   return (
-    <header className="bg-primary">
-      <nav
-        className="flex max-w-8xl items-center justify-between p-6 lg:px-8"
-        aria-label="Global"
-      >
-        <div className="flex lg:flex-1">
-          <Link to="/dashboard" className="flex -m-1.5 p-1.5">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=white"
-              alt="logo"
-            />
-            <span className="m-1 font-bold text-white">Owesome</span>
-          </Link>
-        </div>
-        <div className="flex sm:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMobileMenuOpen(true)}
+    <AppBar
+      position="static"
+      className="p-12"
+      style={{ backgroundColor: "white", boxShadow: "none" }}
+    >
+      <Toolbar disableGutters>
+        <Box sx={{ flexGrow: 1, display: { xs: "flex" } }}>
+          <img src="logo.png" alt="logo" />
+        </Box>
+        <Box sx={{ flexGrow: 1, display: { xs: "flex" }, mr: 1 }}>
+          <a href="/#compare" onClick={() => setTab("compare")}>
+            <Button
+              sx={{
+                my: 2,
+                color: "darkgray",
+                display: "block",
+                textTransform: "capitalize",
+                borderRadius: 0,
+                borderBottom: tab === "compare" ? 1 : 0,
+              }}
+            >
+              {"Compare"}
+            </Button>
+          </a>
+          <a href="/#aboutUS" onClick={() => setTab("aboutUS")}>
+            <Button
+              sx={{
+                my: 2,
+                color: "darkgray",
+                display: "block",
+                textTransform: "capitalize",
+                borderRadius: 0,
+                borderBottom: tab === "aboutUS" ? 1 : 0,
+              }}
+            >
+              {"About US"}
+            </Button>
+          </a>
+          <a href="/#faq" onClick={() => setTab("faq")}>
+            <Button
+              sx={{
+                my: 2,
+                color: "darkgray",
+                display: "block",
+                textTransform: "capitalize",
+                borderRadius: 0,
+                borderBottom: tab === "faq" ? 1 : 0,
+              }}
+            >
+              {"FAQ"}
+            </Button>
+          </a>
+        </Box>
+
+        <Box sx={{ flexGrow: 0 }}>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#313234", color: "white" }}
+            sx={{
+              my: 2,
+              textTransform: "capitalize",
+            }}
           >
-            <span className="sr-only">Open main menu</span>
-            {/* <Bars3Icon className="h-6 w-6 text-white" aria-hidden="true" /> */}
-          </button>
-        </div>
-        <Popover.Group className="hidden sm:flex sm:gap-x-12">
-          <Link to="/dashboard" className={"text-sm leading-6 text-white"}>
-            Dashboard
-          </Link>
-          <Link
-            to="/about"
-            className="text-sm font-semibold leading-6 text-white"
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className="text-sm font-semibold leading-6 text-white"
-          >
-            Contact us
-          </Link>
-        </Popover.Group>
-      </nav>
-    </header>
+            {"Join WaitList for Free"}
+          </Button>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
-
 export default Header;
