@@ -22,12 +22,8 @@ export default function Compare() {
         method: "POST",
         body: { log: email, pwd: "flyemirate615" },
       });
-      // const response = await fetch("http://localhost/wordpress/wp-login.php");
       const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const confirmEmail = () => {
     if (!confirm) {

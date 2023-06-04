@@ -13,7 +13,6 @@ export const signup = async (req, res) => {
 /* LOGGING IN */
 export const login = async (req, res) => {
   try {
-    console.log(req.body);
     res.status(200).json({ msg: true });
   } catch (err) {
     res.status(500).json({ error: err.message });

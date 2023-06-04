@@ -38,22 +38,6 @@ const About = () => {
                 subscription options. Simplify your subscription journey and
                 make informed decisions
               </span>
-              {/* <Typography
-              variant="subtitle1"
-              noWrap
-              sx={{
-                m: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                letterSpacing: ".1rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Save your time from endless browsing and overwhelming subscription
-              options. Simplify your subscription journey and make informed
-              decisions
-            </Typography> */}
             </Grid>
           </Grid>
         </Toolbar>
